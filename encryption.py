@@ -8,9 +8,17 @@ alphabet = [  'a', 'b', 'c', 'd', 'e', 'f', 'g','h', 'i', 'j', 'k', 'l', 'm', 'n
 class kryptor():
     def __init__(self):
         pass
-    def seedMath(seed):
-        #some function
-        return math.sin(seed)
+    def seedMath(self, input):
+        random.seed(input)
+        delta = random.randint(1, 10)
+        return float((math.sqrt(42*math.pow(math.pi, math.e)*input))/math.sqrt(math.e))/delta
 
-    def genSeed(message):
+    def genSeed(self, message):
         seed = toSingleBinaryByte(message)
+        return(self.seedMath(seed))
+
+
+
+testPrint = kryptor()
+seed = testPrint.genSeed("Farts")
+print(seed)
