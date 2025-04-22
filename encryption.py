@@ -27,9 +27,11 @@ class enCrypt():
     ':', ';', '<', '=', '>', '?', '@', '_', '^']
         self.cipher = {}
         self.encryptedMessage = []
+        self.seed = 0
     def genCipher(self, message):
         seedGen = seeder() # add a seeder object for seeding of the random function
-        random.seed(seedGen.genSeed(message)) # seed the random function
+        self.seed = seedGen.genSeed(message) # store the seed for later output
+        random.seed(self.seed) # seed the random function
         for i in self.alphabet: # for each character in the alphabet array
             characterLength = random.randint(3, 7) #generate the random character length 
             characterValue = ""
@@ -39,3 +41,12 @@ class enCrypt():
             self.cipher[i] = characterValue # add the character to the dictionary 
          
         return self.cipher # return the cipher
+    def encryptMessage(self, message): # encrypts the message
+        encryptedMessage = ""
+        for i in message:
+            encryptedMessage += self.cipher[i]
+        return encryptedMessage
+    
+    def getSeed(self):
+        return self.seed
+
