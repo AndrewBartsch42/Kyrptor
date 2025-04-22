@@ -30,3 +30,11 @@ class TestBinary(unittest.TestCase):
         cipher = testenCrypt.genCipher("NO")
         self.assertIsInstance(cipher, dict)
         self.assertEqual(cipher.keys(), Testdict.keys())
+
+    def test_encryptMessage(self): #tests if the encrypt message function outputs a str
+        testEncryption = enCrypt()
+        testMessage = "Bonk!"
+        testEncryption.genCipher(testMessage)
+        newMessage = testEncryption.encryptMessage(testMessage)
+        self.assertIsInstance(newMessage, str)
+        print(newMessage)
