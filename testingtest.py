@@ -2,15 +2,30 @@ from toBinaryOne import toSingleBinaryByte
 import unittest
 from encryption import seeder, enCrypt
 
-class TestBinary(unittest.TestCase):
-    def test_tobinary(self):
-        result = toSingleBinaryByte("andrew stinks12345784654606478917309271-4327041-2356216!@#$%&*()+^_")
-        self.assertEqual(result, 21889554)
-    def test_seedGen(self):
+class TestBinary(unittest.TestCase): 
+    def test_tobinary(self): # tests that the to binary function returns the correct values
+        result = toSingleBinaryByte("drawen skints12345784654606478917309271-4327041-2356216!@#$%&*()+^_")
+        self.assertEqual(result, 21889554) 
+    def test_seedGen(self):# tests the seeder function by checking that it returns a float value
         testSeeder = seeder() 
         self.assertIsInstance(testSeeder.genSeed("andrew"), float)
-    def test_cipherGen(self):
-        Testdict = {'a': 0, 'b': 1, 'c': 2, 'd': 3, 'e': 4, 'f': 5, 'g': 6,'h': 7, 'i': 8, 'j': 9, 'k': 10, 'l': 11, 'm': 12, 'n': 13,'o': 14, 'p': 15, 'q': 16, 'r': 17, 's': 18, 't': 19, 'u': 20,'v': 21, 'w': 22, 'x': 23, 'y': 24, 'z': 25,'A': 26, 'B': 27, 'C': 28, 'D': 29, 'E': 30, 'F': 31, 'G': 32,'H': 33, 'I': 34, 'J': 35, 'K': 36, 'L': 37, 'M': 38, 'N': 39,'O': 40, 'P': 41, 'Q': 42, 'R': 43, 'S': 44, 'T': 45, 'U': 46,'V': 47, 'W': 48, 'X': 49, 'Y': 50, 'Z': 51}
+    def test_cipherGen(self): # test the cipher gen function returning a dictionary and that it has all the keys needed
+        Testdict = {    'A': 1000001, 'B': 1000010, 'C': 1000011, 'D': 1000100, 'E': 1000101,
+    'F': 1000110, 'G': 1000111, 'H': 1001000, 'I': 1001001, 'J': 1001010,
+    'K': 1001011, 'L': 1001100, 'M': 1001101, 'N': 1001110, 'O': 1001111,
+    'P': 1010000, 'Q': 1010001, 'R': 1010010, 'S': 1010011, 'T': 1010100,
+    'U': 1010101, 'V': 1010110, 'W': 1010111, 'X': 1011000, 'Y': 1011001,
+    'Z': 1011010,
+    'a': 1100001, 'b': 1100010, 'c': 1100011, 'd': 1100100, 'e': 1100101,
+    'f': 1100110, 'g': 1100111, 'h': 1101000, 'i': 1101001, 'j': 1101010,
+    'k': 1101011, 'l': 1101100, 'm': 1101101, 'n': 1101110, 'o': 1101111,
+    'p': 1110000, 'q': 1110001, 'r': 1110010, 's': 1110011, 't': 1110100,
+    'u': 1110101, 'v': 1110110, 'w': 1110111, 'x': 1111000, 'y': 1111001,
+    'z': 1111010, ' ': 100000, '!': 100001, '"': 100010, '#': 100011, '$': 100100, '%': 100101, '&': 100110, "'": 100111,
+    '(': 101000, ')': 101001, '*': 101010, '+': 101011, ',': 101100, '-': 101101, '.': 101110, '/': 101111,
+    '0': 110000, '1': 110001, '2': 110010, '3': 110011, '4': 110100, '5': 110101, '6': 110110, '7': 110111,
+    '8': 111000, '9': 111001, ':': 111010, ';': 111011, '<': 111100, '=': 111101, '>': 111110, '?': 111111,
+    '@': 1000000, "_": 1011111, "^": 1011110}
         testenCrypt = enCrypt()
         cipher = testenCrypt.genCipher("NO")
         self.assertIsInstance(cipher, dict)
