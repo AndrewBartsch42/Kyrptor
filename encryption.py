@@ -24,10 +24,11 @@ class enCrypt():
     'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
     ' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/',
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-    ':', ';', '<', '=', '>', '?', '@', '_', '^']
+    ':', ';', '<', '=', '>', '?', '@', '_', '^', ]
         self.cipher = {}
         self.encryptedMessage = []
         self.seed = 0
+        self.delim = ""
     def genCipher(self, message):
         seedGen = seeder() # add a seeder object for seeding of the random function
         self.seed = seedGen.genSeed(message) # store the seed for later output
@@ -39,7 +40,7 @@ class enCrypt():
                 characterValue = characterValue + self.alphabet[random.randint(0, len(self.alphabet)-1)]
                 characterLength -= 1
             self.cipher[i] = characterValue # add the character to the dictionary 
-         
+        self.delim += self.alphabet[random.randint(0,len(self.alphabet)-1)]  
         return self.cipher # return the cipher
     def encryptMessage(self, message): # encrypts the message
         encryptedMessage = ""
@@ -49,4 +50,6 @@ class enCrypt():
     
     def getSeed(self):
         return self.seed
-
+    
+    def getDelim(self):
+        return self.delim
