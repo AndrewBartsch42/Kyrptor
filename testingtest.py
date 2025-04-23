@@ -1,6 +1,7 @@
 from toBinaryOne import toSingleBinaryByte
 import unittest
 from encryption import seeder, enCrypt
+from decryption import deCrypt
 
 class TestBinary(unittest.TestCase): 
     def test_tobinary(self): # tests that the to binary function returns the correct values
@@ -30,6 +31,7 @@ class TestBinary(unittest.TestCase):
         cipher = testenCrypt.genCipher("NO")
         self.assertIsInstance(cipher, dict)
         self.assertEqual(cipher.keys(), Testdict.keys())
+        self.assertEqual(len(testenCrypt.delim), 1)
 
     def test_encryptMessage(self): #tests if the encrypt message function outputs a str
         testEncryption = enCrypt()
@@ -38,3 +40,11 @@ class TestBinary(unittest.TestCase):
         newMessage = testEncryption.encryptMessage(testMessage)
         self.assertIsInstance(newMessage, str)
         print(newMessage)
+    def test_deCrypt(self): #tests if the deCrypt class makes the same thing as the enCrypt class does when generating ciphers and deliminters
+        testEN = enCrypt()
+        cipherEN = testEN.genCipher("octopus")
+        testDC = deCrypt(testEN.getSeed())
+        cipherDC = testDC.genCipher()
+        self.assertDictEqual(cipherEN, cipherDC)
+        self.assertEqual(testDC.getDelim(), testEN.getDelim())
+        self.assertEqual(testDC.getKey(), testEN.getSeed())
