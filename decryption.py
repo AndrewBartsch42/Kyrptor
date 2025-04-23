@@ -10,10 +10,10 @@ class deCrypt():
     'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
     ' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/',
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-    ':', ';', '<', '=', '>', '?', '@', '_', '^']
+    ':', ';', '<', '=', '>', '?', '@', '_']
         self.cipher = {}
+        self.delimCharacters = ['^', '}', '{']
         self.key = key
-        self.delim = ""
     def genCipher(self):
         random.seed(self.key)
         for i in self.alphabet: # for each character in the alphabet array
@@ -23,10 +23,6 @@ class deCrypt():
                 characterValue = characterValue + self.alphabet[random.randint(0, len(self.alphabet)-1)]
                 characterLength -= 1
             self.cipher[i] = characterValue # add the character to the dictionary 
-        self.delim += self.alphabet[random.randint(0,len(self.alphabet)-1)]
         return self.cipher # return the cipher
     def getKey(self):
         return self.key
-    
-    def getDelim(self):
-        return self.delim

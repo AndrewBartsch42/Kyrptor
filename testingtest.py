@@ -3,10 +3,10 @@ import unittest
 from encryption import seeder, enCrypt
 from decryption import deCrypt
 
-class TestBinary(unittest.TestCase): 
+class Tests(unittest.TestCase): 
     def test_tobinary(self): # tests that the to binary function returns the correct values
-        result = toSingleBinaryByte("drawen skints12345784654606478917309271-4327041-2356216!@#$%&*()+^_")
-        self.assertEqual(result, 21889554) 
+        result = toSingleBinaryByte("drawen skints12345784654606478917309271-4327041-2356216!@#$%&*()+_")
+        self.assertEqual(result, 20878444) 
     def test_seedGen(self):# tests the seeder function by checking that it returns a float value
         testSeeder = seeder() 
         self.assertIsInstance(testSeeder.genSeed("andrew"), float)
@@ -26,12 +26,11 @@ class TestBinary(unittest.TestCase):
     '(': 101000, ')': 101001, '*': 101010, '+': 101011, ',': 101100, '-': 101101, '.': 101110, '/': 101111,
     '0': 110000, '1': 110001, '2': 110010, '3': 110011, '4': 110100, '5': 110101, '6': 110110, '7': 110111,
     '8': 111000, '9': 111001, ':': 111010, ';': 111011, '<': 111100, '=': 111101, '>': 111110, '?': 111111,
-    '@': 1000000, "_": 1011111, "^": 1011110}
+    '@': 1000000, "_": 1011111}
         testenCrypt = enCrypt()
         cipher = testenCrypt.genCipher("NO")
         self.assertIsInstance(cipher, dict)
         self.assertEqual(cipher.keys(), Testdict.keys())
-        self.assertEqual(len(testenCrypt.delim), 1)
 
     def test_encryptMessage(self): #tests if the encrypt message function outputs a str
         testEncryption = enCrypt()
@@ -40,11 +39,10 @@ class TestBinary(unittest.TestCase):
         newMessage = testEncryption.encryptMessage(testMessage)
         self.assertIsInstance(newMessage, str)
         print(newMessage)
-    def test_deCrypt(self): #tests if the deCrypt class makes the same thing as the enCrypt class does when generating ciphers and deliminters
+    def test_deCrypt(self): #tests if the deCrypt class makes the same thing as the enCrypt class does when generating ciphers
         testEN = enCrypt()
         cipherEN = testEN.genCipher("octopus")
         testDC = deCrypt(testEN.getSeed())
         cipherDC = testDC.genCipher()
-        self.assertDictEqual(cipherEN, cipherDC)
-        self.assertEqual(testDC.getDelim(), testEN.getDelim())
-        self.assertEqual(testDC.getKey(), testEN.getSeed())
+        self.assertDictEqual(cipherEN, cipherDC, "Dicts not equal")
+        self.assertEqual(testDC.getKey(), testEN.getSeed(), "keys not equal")
