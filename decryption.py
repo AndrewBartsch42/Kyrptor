@@ -1,6 +1,4 @@
 import random
-import math
-
 
 class deCrypt():
     def __init__(self, key):
@@ -27,6 +25,7 @@ class deCrypt():
     def getKey(self):
         return self.key
     def deCrypt(self, encryptedMessage):
+        self.genCipher()
         invertCipher = {v: k for k, v in self.cipher.items()} #https://stackoverflow.com/questions/483666/reverse-invert-a-dictionary-mapping
         decryptedMessage = "" #stores the decrypted message in progress
         charBuffer = ""
