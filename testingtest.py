@@ -38,11 +38,19 @@ class Tests(unittest.TestCase):
         testEncryption.genCipher(testMessage)
         newMessage = testEncryption.encryptMessage(testMessage)
         self.assertIsInstance(newMessage, str)
-        print(newMessage)
-    def test_deCrypt(self): #tests if the deCrypt class makes the same thing as the enCrypt class does when generating ciphers
+    def test_deCryptCipher(self): #tests if the deCrypt class makes the same thing as the enCrypt class does when generating ciphers
         testEN = enCrypt()
         cipherEN = testEN.genCipher("octopus")
         testDC = deCrypt(testEN.getSeed())
         cipherDC = testDC.genCipher()
         self.assertDictEqual(cipherEN, cipherDC, "Dicts not equal")
         self.assertEqual(testDC.getKey(), testEN.getSeed(), "keys not equal")
+
+    def test_deCrypt(self):
+        testEN = enCrypt()
+        testEN.genCipher("testing123")
+        encryptedMessage = testEN.encryptMessage("testing123")
+        testDC = deCrypt(testEN.getSeed())
+        testDC.genCipher()
+        decryptedMessage = testDC.deCrypt(encryptedMessage)
+        self.assertEqual(decryptedMessage, "testing123")
