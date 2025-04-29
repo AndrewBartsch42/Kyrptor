@@ -26,3 +26,18 @@ class deCrypt():
         return self.cipher # return the cipher
     def getKey(self):
         return self.key
+    def deCrypt(self, encryptedMessage):
+        invertCipher = {v: k for k, v in self.cipher.items()} #https://stackoverflow.com/questions/483666/reverse-invert-a-dictionary-mapping
+        decryptedMessage = "" #stores the decrypted message in progress
+        charBuffer = ""
+
+        for i in encryptedMessage:
+            if i == self.delimCharacters[0] or i == self.delimCharacters[1] or i == self.delimCharacters[2]: #stops the adding to the charBuffer and tries to find the buffer value in the inverted cipher
+                decryptedMessage += invertCipher[charBuffer] # adds the value of the key which is the charbuffer value from the inverted cipher
+                charBuffer = "" # clears the charbuffer for next character
+            else:
+                charBuffer += i # adds the single char to the charbuffer until the delim character is hit
+        return decryptedMessage # returns the decrypted message
+    
+
+    
