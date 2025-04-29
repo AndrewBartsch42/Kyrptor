@@ -41,7 +41,8 @@ class enCrypt():
                 characterLength -= 1
             self.cipher[i] = characterValue # add the character to the dictionary 
         return self.cipher # return the cipher
-    def encryptMessage(self, message): # encrypts the message
+    def encryptMessage(self, message): # encrypts the message 
+        self.genCipher(message)
         encryptedMessage = ""
         for i in message:
             encryptedMessage += self.cipher[i] + self.delimCharacters[random.randint(0,2)]
