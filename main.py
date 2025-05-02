@@ -17,15 +17,13 @@ def encryption():
     if request.method == "POST":
         msg = str(request.form.get("MSG"))
         encryptedMSG = encryptor.encryptMessage(msg)
-        return render_template("output.html", text=encryptedMSG, key=encryptor.getSeed())
-    return render_template('encrypt.html')
+    return render_template('encrypt.html', text=encryptedMSG, key=encryptor.getSeed())
 def decryption():
     if request.method == "POST":
         encryptedMsg = str(request.form.get("encryptedMSG"))
         seed = request.form.get("key", float)
         decryptor = deCrypt(seed)
         msg = decryptor.deCrypt(encryptedMsg)
-        return render_template("output.html", text=msg)
     return render_template('decrypt.html')
 if __name__ == '__main__':
     app.run(debug=True)
