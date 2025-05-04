@@ -4,10 +4,10 @@
     <title>Decryption</title>
     <body>
         <h1>Decrypt</h1>
-        <form method="decrypt" autocapitalize="off" autocomplete="off">
-        <input type="text" name="encryptedMSG">
-        <input type="float" name="key">
-        <input type="submit">
+        <form method="POST" autocapitalize="off" autocomplete="off" action="decrypt.html">
+        <input type="text" name="encryptedMSG">MSG</input>
+        <input type="float" name="key">Key</input>
+        <input type="submit" name="decrypt" value="start">
         </form>
     </body>
 </html>

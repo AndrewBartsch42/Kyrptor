@@ -3,13 +3,9 @@
     <title>Encryption</title>
     <body>
         <h1>Encrypt</h1>
-        <form method="encrypt" autocomplete="off" autocapitalize="off">
-            <input type="text" name="MSG">
-            <input type="submit">
+        <form method="POST" autocomplete="off" autocapitalize="off" action="encrypt.html">
+            <input type="text" name="MSG" required>
+            <input type="submit" name="encrypt" value="start">
         </form>
-        <p>Here is the encrypted Text</p>
-        <p>{{ text }}</p>
-        <p>Here is the key</p>
-        <p>{{ key }}</p>
     </body>
 </html>
