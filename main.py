@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request#https://www.youtube.com/watch?v=RuSH-DEmwEg flask tutorial
+from flask import Flask, render_template, request, redirect, url_for#https://www.youtube.com/watch?v=RuSH-DEmwEg flask tutorial
 from encryption import enCrypt
 from decryption import deCrypt
 from storage import HTMLstorage
@@ -27,7 +27,7 @@ def encrypt():
         print("grabbbing start variable")
         if 'encrypt' in request.form:
             startVal = request.form["encrypt"]
-            if startVal == 'start':
+            if startVal == 'Start':
                 msg = str(request.form.get("MSG"))
                 encryptedMSG = encryptor.encryptMessage(msg)
                 storage.setencryptedMSG(encryptedMSG)
@@ -49,10 +49,20 @@ def decrypt():
                 print("going to decrypted output")
                 return decryptedoutput()
     return render_template("decrypt.html")
-@app.route("/output.html")
+@app.route("/output.html", methods=['POST', 'GET'])
 def decryptedoutput():
-    return render_template("output.html", key=storage.seed, text=storage.msg)
+    if request.method == "POST":
+        if "Home" in request.form:
+            home = request.form["Home"]
+            if home == "Back":
+                return redirect(url_for('/'))
+    return render_template("output.html", text=storage.msg)
 def encryptedoutput():
+    if request.method == "POST":
+        if "Home" in request.form:
+            home = request.form["Home"]
+            if home == "Back":
+                return redirect(url_for('/'))
     return render_template("output.html", key=storage.seed, text=storage.encryptedMSG)
 if __name__ == '__main__':
     app.run(debug=True)
