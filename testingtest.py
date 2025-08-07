@@ -54,3 +54,4 @@ class Tests(unittest.TestCase):
         testDC.genCipher()
         decryptedMessage = testDC.deCrypt(encryptedMessage)
         self.assertEqual(decryptedMessage, "testing123")
+
